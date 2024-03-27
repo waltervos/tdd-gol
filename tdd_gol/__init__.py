@@ -33,8 +33,10 @@ class Cell:
     def next_generation(self, neighbours):
         if len(neighbours) == 0:
             self._alive = False
-        elif len(neighbours) >= 2:
+        elif len(neighbours) in [2, 3]:
             self._alive = True
+        else:
+            self._alive = False
     
     def is_alive(self):
         return self._alive
