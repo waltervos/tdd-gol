@@ -11,25 +11,24 @@ from tdd_gol import Cell, Matrix
 # (at least) One position away from every edge, a cell has eight neighbours
 # At the edges a cell has fewer neighbours (the matrix isn't a globe): 3 or 5
 
+
 def neighbours_in(matrix: Matrix, at_row, at_column):
     return matrix.neighbours_for(at_row, at_column)
 
+
 def a_3x3_matrix():
-    return Matrix([
-            [1,2,3],
-            [4,5,6],
-            [7,8,9]
-        ])
+    return Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
 
 class DescribeFindingNeighboursInAMatrix:
     def it_has_eight_neighbours_in_the_middle_of_matrix(self):
         matrix = a_3x3_matrix()
-        
-        assert neighbours_in(matrix, at_row=1, at_column=1) == [1,2,3,4,6,7,8,9]
+
+        assert neighbours_in(matrix, at_row=1, at_column=1) == [1, 2, 3, 4, 6, 7, 8, 9]
 
     def it_has_five_neighbours_in_the_middle_at_the_left_edge(self):
         matrix = a_3x3_matrix()
-        assert neighbours_in(matrix, at_row=1, at_column=0) == [1,2,5,7,8]
+        assert neighbours_in(matrix, at_row=1, at_column=0) == [1, 2, 5, 7, 8]
 
     def it_has_five_neighbours_in_the_middle_at_the_right_edge(self):
         matrix = a_3x3_matrix()
@@ -41,6 +40,7 @@ class DescribeFindingNeighboursInAMatrix:
     def it_has_five_neighbours_at_the_bottom_in_the_middle_column(self):
         assert neighbours_in(a_3x3_matrix(), at_row=2, at_column=1) == [4, 5, 6, 7, 9]
 
+
 # Rules of the game:
 # Any live cell with fewer than two live neighbors dies, as if by underpopulation.
 # Any live cell with two or three live neighbors lives on to the next generation.
@@ -51,8 +51,10 @@ class DescribeFindingNeighboursInAMatrix:
 def a_live_cell() -> Cell:
     return Cell(alive=True)
 
+
 def a_dead_cell() -> Cell:
     return Cell(alive=False)
+
 
 class DescribeCellLifecycle:
     def it_survives_with_two_live_neighbours(self):
@@ -60,10 +62,10 @@ class DescribeCellLifecycle:
         cell.next_generation([a_live_cell(), a_live_cell()])
 
         assert cell.is_alive()
-        
+
     def it_dies_when_it_has_four_live_neighbours(self):
         cell = a_live_cell()
-        cell.next_generation([a_live_cell() for _ in range(0,4)])
+        cell.next_generation([a_live_cell() for _ in range(0, 4)])
 
         assert not cell.is_alive()
 
@@ -75,8 +77,8 @@ class DescribeCellLifecycle:
 
     def it_resurrects_when_it_has_three_live_neighbours(self):
         cell = a_dead_cell()
-        cell.next_generation([a_live_cell() for _ in range(0,3)])
-        
+        cell.next_generation([a_live_cell() for _ in range(0, 3)])
+
         assert cell.is_alive()
 
     def it_remains_dead_without_live_neighbours(self):
@@ -89,3 +91,13 @@ class DescribeCellLifecycle:
 # Game:
 # Produces the next generation for each cell
 # Exits if no cells change on next generation
+
+
+class DescribeGameRunner:
+    def it_produces_the_next_generation_for_each_cell(self):
+        game = Game(width=2, height=2, live_cells_at=[(0, 1), (1, 0), (1, 1)])
+        game.iterate()
+        assert game.get_state() == Matrix(
+            cells=[[a_live_cell(), a_dead_cell()],
+                   [a_dead_cell(), a_live_cell()]]
+        )
