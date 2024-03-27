@@ -1,0 +1,4 @@
+[alias]
+red = commit -a -m "red"
+green = commit -a -m "green"
+refactor = commit -a -m "refactor"
