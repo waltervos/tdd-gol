@@ -55,10 +55,20 @@ def a_dead_cell() -> Cell:
     return Cell(alive=False)
 
 class DescribeCellLifecycle:
-    def it_dies_when_it_has_no_neighbours(self):
+    def it_survives_with_two_live_neighbours(self):
         cell = a_live_cell()
-        cell.next_generation(neighbours=[])
+        cell.next_generation([a_live_cell(), a_live_cell()])
         
+    def it_dies_when_it_has_four_live_neighbours(self):
+        cell = a_live_cell()
+        cell.next_generation([a_live_cell() for _ in range(0,4)])
+
+        assert not cell.is_alive()
+
+    def it_dies_with_one_living_and_one_dead_neighbour(self):
+        cell = a_live_cell()
+        cell.next_generation([a_live_cell(), a_dead_cell()])
+
         assert not cell.is_alive()
 
     def it_resurrects_when_it_has_three_live_neighbours(self):
@@ -67,9 +77,6 @@ class DescribeCellLifecycle:
 
         assert cell.is_alive()
 
-    def it_survives_with_two_live_neighbours(self):
-        cell = a_live_cell()
-        cell.next_generation([a_live_cell(), a_live_cell()])
         
         assert cell.is_alive()
 
@@ -79,11 +86,6 @@ class DescribeCellLifecycle:
 
         assert not cell.is_alive()
 
-    def it_dies_when_it_has_four_live_neighbours(self):
-        cell = a_live_cell()
-        cell.next_generation([a_live_cell() for _ in range(0,4)])
-
-        assert not cell.is_alive()
 
 # Game:
 # Produces the next generation for each cell
