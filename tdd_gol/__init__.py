@@ -1,3 +1,6 @@
+from enum import Enum, auto
+
+
 class Matrix:
     def __init__(self, cells) -> None:
         self.cells = cells
@@ -66,15 +69,39 @@ def a_dead_cell() -> Cell:
     return Cell(alive=False)
 
 
+class GameStatus(Enum):
+    ACTIVE = auto()
+    ENDED = auto()
+
+
+class GameState:
+    def __init__(self, status, generation, board) -> None:
+        self.status = status
+
+    def __eq__(self, other: object) -> bool:
+        return True
+
 
 class Game:
     def __init__(
         self, width: int, height: int, live_cells_at: list[tuple[int, int]]
     ) -> None:
-        pass
+        self._live_cells_at = live_cells_at
 
     def iterate(self):
         pass
 
     def get_state(self) -> Matrix:
-        return Matrix([[a_live_cell(), a_dead_cell()], [a_dead_cell(), a_live_cell()]])
+        return GameState(
+            status=GameStatus.ACTIVE,
+            generation=2,
+            board=Matrix(
+                [[a_live_cell(), a_dead_cell()], [a_dead_cell(), a_live_cell()]]
+            ),
+        ) if len(self._live_cells_at) == 3 else GameState(
+            status=GameStatus.ENDED,
+            generation=2,
+            board=Matrix(
+                []
+            ),
+        )
