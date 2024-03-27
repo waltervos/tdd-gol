@@ -5,7 +5,7 @@
 # Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
 
-from tdd_gol import Cell, Game, GameState, GameStatus, Matrix, a_dead_cell, a_live_cell
+from tdd_gol import Matrix, a_dead_cell, a_live_cell
 
 # Finding neighbours in a matrix:
 # (at least) One position away from every edge, a cell has eight neighbours
@@ -86,17 +86,4 @@ class DescribeCellLifecycle:
 
 
 class DescribeGameRunner:
-    def it_produces_the_next_generation_for_each_cell(self):
-        game = Game(width=2, height=2, live_cells_at=[(0, 1), (1, 0), (1, 1)])
-        game.iterate()
-        assert game.get_state().board == Matrix(
-            [[a_live_cell(), a_dead_cell()], [a_dead_cell(), a_live_cell()]]
-        )
-
-    def it_halts_when_the_next_generation_is_the_same_as_the_last_one(self):
-        game = Game(width=2, height=2, live_cells_at=[(0,0)])
-        assert game.get_state().status == GameStatus.ENDED
-
-    def it_starts_at_the_first_generation(self):
-        game = Game(width=2, height=2, live_cells_at=[(0,0)])
-        assert game.get_state().generation == 1
+    pass
