@@ -31,13 +31,10 @@ class Cell:
         self._alive = alive
 
     def next_generation(self, neighbours):
-        if not self.is_alive() and len(neighbours) == 0:
-            return
-        
-        if not self.is_alive() or len(neighbours) == 2:
-            self._alive = True
-        else:
+        if len(neighbours) == 0:
             self._alive = False
+        elif len(neighbours) >= 2:
+            self._alive = True
     
     def is_alive(self):
         return self._alive
