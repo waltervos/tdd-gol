@@ -1,2 +1,11 @@
 def neighbours_in(matrix, at_row, at_column):
-    return [1,2,3,4,6,7,8,9]
+    return [
+        matrix[at_row-1][at_column-1],
+        matrix[at_row-1][at_column  ],
+        matrix[at_row-1][at_column+1],
+        matrix[at_row  ][at_column-1],
+        matrix[at_row  ][at_column+1],
+        matrix[at_row+1][at_column-1],
+        matrix[at_row+1][at_column  ],
+        matrix[at_row+1][at_column+1],
+    ]
