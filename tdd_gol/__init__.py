@@ -32,13 +32,16 @@ class Cell:
         self._alive = alive
 
     def next_generation(self, neighbours):
-        if len([n for n in neighbours if n.is_alive()]) not in [2, 3]:
+        if self._living_count(neighbours) not in [2, 3]:
             self._alive = False
         else:
             self._alive = True
 
     def is_alive(self):
         return self._alive
+    
+    def _living_count(self, cells):
+        return len([c for c in cells if c.is_alive()])
 
 
 def neighbours_in(matrix: Matrix, at_row, at_column):
