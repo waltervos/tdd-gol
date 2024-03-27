@@ -8,6 +8,9 @@
 # (at least) One position away from every edge, a cell has eight neighbours
 # At the edges a cell has fewer neighbours (the matrix isn't a globe): 3 or 5
 
+from tdd_gol import neighbours_in
+
+
 class DescribeFindingNeighboursInAMAtrix:
     def it_has_eight_neighbours_in_the_middle_of_matrix(self):
         matrix = [
