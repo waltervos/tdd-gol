@@ -48,22 +48,22 @@ class DescribeFindingNeighboursInAMatrix:
 # Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
 
-def alive() -> Cell:
+def a_live_cell() -> Cell:
     return Cell(alive=True)
 
-def dead() -> Cell:
+def a_dead_cell() -> Cell:
     return Cell(alive=False)
 
 class DescribeCellLifecycle:
     def it_dies_when_it_has_no_neighbours(self):
-        cell = alive()
+        cell = a_live_cell()
         cell.next_generation(neighbours=[])
         
         assert not cell.is_alive()
 
     def it_resurrects_when_it_has_three_live_neighbours(self):
-        cell = dead()
-        cell.next_generation([alive() for _ in range(0,3)])
+        cell = a_dead_cell()
+        cell.next_generation([a_live_cell() for _ in range(0,3)])
 
         assert cell.is_alive()
 # Game:
