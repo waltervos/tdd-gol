@@ -15,9 +15,7 @@ class Matrix:
     def neighbours_for(self, row, column):
         result = []
         for row_offset, column_offset in self._neigbour_offset:
-            if (column + column_offset) >= 0 and (column + column_offset) < len(
-                self.cells
-            ):
+            if (column + column_offset) >= 0 and (column + column_offset) < 3:
                 result.append(
                     self._cell_at(row + row_offset, column + column_offset)
                 )
