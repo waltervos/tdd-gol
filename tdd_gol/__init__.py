@@ -15,11 +15,11 @@ class Matrix:
     def neighbours_for(self, row, column):
         result = []
         for row_offset, column_offset in self._neigbour_offset:
-            column_index = column + column_offset
-            row_index = row + row_offset
-            if (column_index) >= 0 and (column_index) < 3 and row_index >= 0 and row_index < 3: 
+            neighbour_column_index = column + column_offset
+            neighbour_row_index = row + row_offset
+            if 0 <= neighbour_column_index < 3 and 0 <= neighbour_row_index < 3:
                 result.append(
-                    self._cell_at(row_index, column_index)
+                    self._cell_at(neighbour_row_index, neighbour_column_index)
                 )
         return result
 
