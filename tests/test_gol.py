@@ -8,7 +8,10 @@
 # (at least) One position away from every edge, a cell has eight neighbours
 # At the edges a cell has fewer neighbours (the matrix isn't a globe): 3 or 5
 
-from tdd_gol import neighbours_in, Matrix
+from tdd_gol import Matrix
+
+def neighbours_in(matrix: Matrix, at_row, at_column):
+    return matrix.neighbours_for(at_row, at_column)
 
 def a_3x3_matrix():
     return Matrix([
@@ -21,13 +24,11 @@ class DescribeFindingNeighboursInAMAtrix:
     def it_has_eight_neighbours_in_the_middle_of_matrix(self):
         matrix = a_3x3_matrix()
         
-        neighbours = neighbours_in(matrix, at_row=1, at_column=1)
-        assert neighbours == [1,2,3,4,6,7,8,9]
+        assert neighbours_in(matrix, at_row=1, at_column=1) == [1,2,3,4,6,7,8,9]
 
     def it_has_five_neighbours_in_the_middle_at_the_left_edge(self):
         matrix = a_3x3_matrix()
-        neighbours = neighbours_in(matrix, at_row=1, at_column=0)
-        assert neighbours == [1,2,5,7,8]
+        assert neighbours_in(matrix, at_row=1, at_column=0) == [1,2,5,7,8]
 
 # Game:
 # Produces the next generation for each cell
