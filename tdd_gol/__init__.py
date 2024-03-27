@@ -33,14 +33,14 @@ class Cell:
 
     def next_generation(self, neighbours):
         if self._living_count(neighbours) not in [2, 3]:
-            self._die()
+            self._die_if_alive()
         else:
-            self._respawn()
+            self._respawn_if_dead()
 
-    def _die(self):
+    def _die_if_alive(self):
         if self.is_alive(): self._alive = False
 
-    def _respawn(self):
+    def _respawn_if_dead(self):
         if not self.is_alive(): self._alive = True
 
     def is_alive(self):
