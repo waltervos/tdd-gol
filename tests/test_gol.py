@@ -5,7 +5,7 @@
 # Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
 
-from tdd_gol import Cell, Matrix
+from tdd_gol import Cell, Game, Matrix
 
 # Finding neighbours in a matrix:
 # (at least) One position away from every edge, a cell has eight neighbours
@@ -98,6 +98,6 @@ class DescribeGameRunner:
         game = Game(width=2, height=2, live_cells_at=[(0, 1), (1, 0), (1, 1)])
         game.iterate()
         assert game.get_state() == Matrix(
-            cells=[[a_live_cell(), a_dead_cell()],
-                   [a_dead_cell(), a_live_cell()]]
+            [[a_live_cell(), a_dead_cell()],
+             [a_dead_cell(), a_live_cell()]]
         )
