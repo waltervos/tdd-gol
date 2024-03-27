@@ -26,18 +26,20 @@ class Matrix:
     def _cell_at(self, row, column):
         return self.cells[row][column]
 
+
 class Cell:
     def __init__(self, alive):
         self._alive = alive
 
     def next_generation(self, neighbours):
-        if len(neighbours) not in [2,3]:
+        if len(neighbours) not in [2, 3]:
             self._alive = False
         else:
             self._alive = True
-    
+
     def is_alive(self):
         return self._alive
+
 
 def neighbours_in(matrix: Matrix, at_row, at_column):
     return matrix.neighbours_for(at_row, at_column)
