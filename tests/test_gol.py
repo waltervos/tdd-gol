@@ -96,3 +96,7 @@ class DescribeGameRunner:
     def it_halts_when_the_next_generation_is_the_same_as_the_last_one(self):
         game = Game(width=2, height=2, live_cells_at=[(0,0)])
         assert game.get_state().status == GameStatus.ENDED
+
+    def it_starts_at_the_first_generation(self):
+        game = Game(width=2, height=2, live_cells_at=[(0,0)])
+        assert game.get_state().generation == 1
