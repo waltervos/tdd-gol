@@ -77,6 +77,7 @@ class GameStatus(Enum):
 class GameState:
     def __init__(self, status, generation, board) -> None:
         self.status = status
+        self.generation = generation
         self.board = board
 
     def __eq__(self, other: object) -> bool:
@@ -87,6 +88,7 @@ class Game:
     def __init__(
         self, width: int, height: int, live_cells_at: list[tuple[int, int]]
     ) -> None:
+        self._generation = 1
         self._live_cells_at = live_cells_at
 
     def iterate(self):
@@ -101,7 +103,7 @@ class Game:
             ),
         ) if len(self._live_cells_at) == 3 else GameState(
             status=GameStatus.ENDED,
-            generation=2,
+            generation=self._generation,
             board=Matrix(
                 []
             ),
