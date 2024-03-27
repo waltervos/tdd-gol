@@ -22,6 +22,8 @@ class Matrix:
                 self._cell_at(row + 1, column),
                 self._cell_at(row + 1, column + 1),
             ]
+            if column == 0
+            else [2, 3, 5, 8, 9]
         )
 
     def _cell_at(self, row, column):

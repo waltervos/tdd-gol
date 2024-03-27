@@ -30,6 +30,10 @@ class DescribeFindingNeighboursInAMAtrix:
         matrix = a_3x3_matrix()
         assert neighbours_in(matrix, at_row=1, at_column=0) == [1,2,5,7,8]
 
+    def it_has_five_neighbours_in_the_middle_at_the_right_edge(self):
+        matrix = a_3x3_matrix()
+        assert neighbours_in(matrix, at_row=1, at_column=2) == [2, 3, 5, 8, 9]
+
 # Game:
 # Produces the next generation for each cell
 # Exits if no cells change on next generation
