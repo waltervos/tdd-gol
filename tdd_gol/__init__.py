@@ -23,7 +23,13 @@ class Matrix:
                 self._cell_at(row + 1, column + 1),
             ]
             if column == 0
-            else [2, 3, 5, 8, 9]
+            else [
+                self._cell_at(row - 1, column - 1),
+                self._cell_at(row - 1, column),
+                self._cell_at(row, column - 1),
+                self._cell_at(row + 1, column - 1),
+                self._cell_at(row + 1, column),
+            ]
         )
 
     def _cell_at(self, row, column):
