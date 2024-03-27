@@ -73,6 +73,12 @@ class DescribeCellLifecycle:
         
         assert cell.is_alive()
 
+    def it_remains_dead_without_live_neighbours(self):
+        cell = a_dead_cell()
+        cell.next_generation([])
+
+        assert not cell.is_alive()
+
 # Game:
 # Produces the next generation for each cell
 # Exits if no cells change on next generation
