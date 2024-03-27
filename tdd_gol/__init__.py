@@ -77,6 +77,7 @@ class GameStatus(Enum):
 class GameState:
     def __init__(self, status, generation, board) -> None:
         self.status = status
+        self.board = board
 
     def __eq__(self, other: object) -> bool:
         return True

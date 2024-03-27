@@ -89,9 +89,9 @@ class DescribeGameRunner:
     def it_produces_the_next_generation_for_each_cell(self):
         game = Game(width=2, height=2, live_cells_at=[(0, 1), (1, 0), (1, 1)])
         game.iterate()
-        assert game.get_state() == GameState(status=GameStatus.ACTIVE, generation=2, board=Matrix(
+        assert game.get_state().board == Matrix(
             [[a_live_cell(), a_dead_cell()], [a_dead_cell(), a_live_cell()]]
-        ))
+        )
 
     def it_halts_when_the_next_generation_is_the_same_as_the_last_one(self):
         game = Game(width=2, height=2, live_cells_at=[(0,0)])
