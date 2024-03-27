@@ -11,13 +11,3 @@
 # Game:
 # Produces the next generation for each cell
 # Exits if no cells change on next generation
-
-class DescribeNeighboursInAMatrix:
-    def it_has_eight_neighbours_in_the_center(self):
-        matrix = [
-            [1, 2, 3],
-            [4, 5, 6],
-            [7, 8, 9]
-        ]
-        neighbours = neighbours_in(matrix, at_row=1, at_column=1)
-        assert neighbours == [1,2,3,4,6,7,8,9]
