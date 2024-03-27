@@ -58,6 +58,8 @@ class DescribeCellLifecycle:
     def it_survives_with_two_live_neighbours(self):
         cell = a_live_cell()
         cell.next_generation([a_live_cell(), a_live_cell()])
+
+        assert cell.is_alive()
         
     def it_dies_when_it_has_four_live_neighbours(self):
         cell = a_live_cell()
