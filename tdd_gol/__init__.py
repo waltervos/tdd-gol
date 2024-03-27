@@ -25,7 +25,7 @@ class Matrix:
 
     def _cell_at(self, row, column):
         return self.cells[row][column]
-    
+
     def __eq__(self, other: "Matrix") -> bool:
         return self.cells == other.cells
 
@@ -53,13 +53,17 @@ class Cell:
 
     def _living_count(self, cells):
         return len([c for c in cells if c.is_alive()])
-    
+
     def __eq__(self, other: "Cell") -> bool:
         return self.is_alive() == other.is_alive()
 
 
-def neighbours_in(matrix: Matrix, at_row, at_column):
-    return matrix.neighbours_for(at_row, at_column)
+def a_live_cell() -> Cell:
+    return Cell(alive=True)
+
+
+def a_dead_cell() -> Cell:
+    return Cell(alive=False)
 
 
 class Game:
@@ -73,6 +77,8 @@ class Game:
 
     def get_state(self) -> Matrix:
         return Matrix(
-            [[Cell(alive=True), Cell(alive=False)],
-             [Cell(alive=False), Cell(alive=True)]]
+            [
+                [Cell(alive=True), Cell(alive=False)],
+                [Cell(alive=False), Cell(alive=True)],
+            ]
         )
