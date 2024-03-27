@@ -38,10 +38,10 @@ class Cell:
             self._respawn()
 
     def _die(self):
-        self._alive = False
+        if self.is_alive(): self._alive = False
 
     def _respawn(self):
-        self._alive = True
+        if not self.is_alive(): self._alive = True
 
     def is_alive(self):
         return self._alive
