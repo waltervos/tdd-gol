@@ -74,9 +74,6 @@ class DescribeCellLifecycle:
     def it_resurrects_when_it_has_three_live_neighbours(self):
         cell = a_dead_cell()
         cell.next_generation([a_live_cell() for _ in range(0,3)])
-
-        assert cell.is_alive()
-
         
         assert cell.is_alive()
 
