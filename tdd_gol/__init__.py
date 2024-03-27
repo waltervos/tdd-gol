@@ -76,9 +76,4 @@ class Game:
         pass
 
     def get_state(self) -> Matrix:
-        return Matrix(
-            [
-                [Cell(alive=True), Cell(alive=False)],
-                [Cell(alive=False), Cell(alive=True)],
-            ]
-        )
+        return Matrix([[a_live_cell(), a_dead_cell()], [a_dead_cell(), a_live_cell()]])
