@@ -32,7 +32,7 @@ class Cell:
         self._alive = alive
 
     def next_generation(self, neighbours):
-        if len(neighbours) not in [2, 3]:
+        if len([n for n in neighbours if n.is_alive()]) not in [2, 3]:
             self._alive = False
         else:
             self._alive = True
