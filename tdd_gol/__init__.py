@@ -28,13 +28,16 @@ class Matrix:
 
 class Cell:
     def __init__(self, alive):
-        self.alive = alive
+        self._alive = alive
 
     def next_generation(self, neighbours):
-        pass
+        if not self.is_alive():
+            self._alive = True
+        else:
+            self._alive = False
     
     def is_alive(self):
-        return False
+        return self._alive
 
 def neighbours_in(matrix: Matrix, at_row, at_column):
     return matrix.neighbours_for(at_row, at_column)

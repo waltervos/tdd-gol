@@ -4,11 +4,12 @@
 # Any live cell with more than three live neighbors dies, as if by overpopulation.
 # Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
+
+from tdd_gol import Cell, Matrix
+
 # Finding neighbours in a matrix:
 # (at least) One position away from every edge, a cell has eight neighbours
 # At the edges a cell has fewer neighbours (the matrix isn't a globe): 3 or 5
-
-from tdd_gol import Cell, Matrix
 
 def neighbours_in(matrix: Matrix, at_row, at_column):
     return matrix.neighbours_for(at_row, at_column)
@@ -20,7 +21,7 @@ def a_3x3_matrix():
             [7,8,9]
         ])
 
-class DescribeFindingNeighboursInAMAtrix:
+class DescribeFindingNeighboursInAMatrix:
     def it_has_eight_neighbours_in_the_middle_of_matrix(self):
         matrix = a_3x3_matrix()
         
@@ -40,12 +41,24 @@ class DescribeFindingNeighboursInAMAtrix:
     def it_has_five_neighbours_at_the_bottom_in_the_middle_column(self):
         assert neighbours_in(a_3x3_matrix(), at_row=2, at_column=1) == [4, 5, 6, 7, 9]
 
+# Rules of the game:
+# Any live cell with fewer than two live neighbors dies, as if by underpopulation.
+# Any live cell with two or three live neighbors lives on to the next generation.
+# Any live cell with more than three live neighbors dies, as if by overpopulation.
+# Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+
 class DescribeCellLifecycle:
     def it_dies_when_it_has_no_neighbours(self):
         cell = Cell(alive=True)
         cell.next_generation(neighbours=[])
         
         assert not cell.is_alive()
+
+    def it_resurrects_when_it_has_three_live_neighbours(self):
+        cell = Cell(alive=False)
+        cell.next_generation([Cell(alive=True) for _ in range(0,3)])
+        
+        assert cell.is_alive()
 # Game:
 # Produces the next generation for each cell
 # Exits if no cells change on next generation
