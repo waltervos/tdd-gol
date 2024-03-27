@@ -66,6 +66,7 @@ def a_dead_cell() -> Cell:
     return Cell(alive=False)
 
 
+
 class Game:
     def __init__(
         self, width: int, height: int, live_cells_at: list[tuple[int, int]]
