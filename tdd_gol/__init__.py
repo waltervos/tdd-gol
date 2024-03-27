@@ -26,6 +26,15 @@ class Matrix:
     def _cell_at(self, row, column):
         return self.cells[row][column]
 
+class Cell:
+    def __init__(self, alive):
+        self.alive = alive
+
+    def next_generation(self, neighbours):
+        pass
+    
+    def is_alive(self):
+        return False
 
 def neighbours_in(matrix: Matrix, at_row, at_column):
     return matrix.neighbours_for(at_row, at_column)
