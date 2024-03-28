@@ -81,3 +81,9 @@ class Game:
 
     def get_board(self):
         return self.board
+    
+    def get_state(self):
+        return {
+            'status': "Halted",
+            'board': self.board
+        }

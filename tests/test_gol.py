@@ -106,7 +106,7 @@ class DescribeRunningTheGame:
         game.next_generation()
         game.next_generation()
         game_state = game.get_state()
-        assert game_state.status == "Halted" and game_state.board == [
+        assert game_state['status'] == "Halted" and game_state['board'] == [
                 [a_live_cell(), a_live_cell()],
                 [a_live_cell(), a_live_cell()]
             ]
