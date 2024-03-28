@@ -1,4 +1,4 @@
-from enum import Enum, auto
+from enum import Enum, StrEnum, auto
 
 
 class Matrix:
@@ -68,18 +68,22 @@ def a_live_cell() -> Cell:
 def a_dead_cell() -> Cell:
     return Cell(alive=False)
 
+class GameStatus(StrEnum):
+    INITIALISED = auto()
+    ACTIVE = auto()
+    HALTED = auto()
 
 class Game:
     def __init__(self, width, height, life_at) -> None:
         self.board = [[a_live_cell(), a_live_cell()], [a_live_cell(), a_dead_cell()]]
-        self.status = "Initialised"
+        self.status = GameStatus.INITIALISED
 
     def next_generation(self):
         self.board = [
                 [a_live_cell(), a_live_cell()],
                 [a_live_cell(), a_live_cell()]
             ]
-        if self.status == "Initialised":
+        if self.status == GameStatus.INITIALISED:
             self.status = "Active"
         else:
             self.status = "Halted"
