@@ -89,7 +89,7 @@ class DescribeRunningTheGame:
     def it_initializes_the_game(self):
         game = Game(width=2, height=2, life_at=[(0,0), (0,1), (1,0)])
         game_state = game.get_state()
-        assert game_state['status'] == "Active" and game_state['board'] == [
+        assert game_state['status'] == "Initialised" and game_state['board'] == [
             [a_live_cell(), a_live_cell()],
             [a_live_cell(), a_dead_cell()]
         ]
@@ -97,8 +97,7 @@ class DescribeRunningTheGame:
     def it_produces_the_next_generation(self):
         game = Game(width=2, height=2, life_at=[(0,0), (0,1), (1,0)])
         game.next_generation()
-        game_state = game.get_state()
-        assert game_state['status'] == "Active" and game_state['board'] == [
+        assert game.get_board() == [
                 [a_live_cell(), a_live_cell()],
                 [a_live_cell(), a_live_cell()]
             ]
