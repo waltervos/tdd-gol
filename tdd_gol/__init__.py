@@ -87,9 +87,6 @@ class Game:
             self.status = GameStatus.ACTIVE
         else:
             self.status = GameStatus.HALTED
-
-    def get_board(self):
-        return self.board
     
     def get_state(self):
         return {
