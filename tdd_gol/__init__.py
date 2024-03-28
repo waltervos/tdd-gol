@@ -72,7 +72,7 @@ def a_dead_cell() -> Cell:
 class Game:
     def __init__(self, width, height, life_at) -> None:
         self.board = [[a_live_cell(), a_live_cell()], [a_live_cell(), a_dead_cell()]]
-        self.status = "Active"
+        self.status = "Initialised"
 
     def next_generation(self):
         self.board = [
