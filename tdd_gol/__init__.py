@@ -84,7 +84,7 @@ class Game:
                 [a_live_cell(), a_live_cell()]
             ]
         if self.status == GameStatus.INITIALISED:
-            self.status = "Active"
+            self.status = GameStatus.ACTIVE
         else:
             self.status = "Halted"
 

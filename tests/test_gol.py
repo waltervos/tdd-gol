@@ -98,7 +98,7 @@ class DescribeRunningTheGame:
         game = Game(width=2, height=2, life_at=[(0,0), (0,1), (1,0)])
         game.next_generation()
         game_state = game.get_state()
-        assert game_state['status'] == "Active" and game_state['board'] == [
+        assert game_state['status'] == GameStatus.ACTIVE and game_state['board'] == [
                 [a_live_cell(), a_live_cell()],
                 [a_live_cell(), a_live_cell()]
             ]
