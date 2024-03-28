@@ -79,7 +79,10 @@ class Game:
                 [a_live_cell(), a_live_cell()],
                 [a_live_cell(), a_live_cell()]
             ]
-        self.status = "Halted"
+        if self.status == "Initialised":
+            self.status = "Active"
+        else:
+            self.status = "Halted"
 
     def get_board(self):
         return self.board
