@@ -6,7 +6,7 @@
 
 
 from tdd_gol import Game, GameStatus, Matrix, a_dead_cell, a_live_cell
-
+import pytest
 # Finding neighbours in a matrix:
 # (at least) One position away from every edge, a cell has eight neighbours
 # At the edges a cell has fewer neighbours (the matrix isn't a globe): 3 or 5
@@ -112,3 +112,13 @@ class DescribeRunningTheGame:
                 [a_live_cell(), a_live_cell()],
                 [a_live_cell(), a_live_cell()]
             ]
+        
+    def it_maintains_a_blinker(self):
+        game = Game(width=3, height=3, life_at=[(0,1), (1,1), (2,1)])
+        game.next_generation()
+        game_state = game.get_state()
+        assert game_state['board'] == [
+            [a_dead_cell(), a_dead_cell(), a_dead_cell()],
+            [a_live_cell(), a_live_cell(), a_live_cell()],
+            [a_dead_cell(), a_dead_cell(), a_dead_cell()],
+        ]
