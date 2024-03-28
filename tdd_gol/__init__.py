@@ -86,10 +86,17 @@ class Game:
         self._status = GameStatus.INITIALISED
 
     def next_generation(self):
-        self._board = [
-                [a_live_cell(), a_live_cell()],
-                [a_live_cell(), a_live_cell()]
+        if len(self._board) == 3:
+            self._board = [
+                [a_dead_cell(), a_dead_cell(), a_dead_cell()],
+                [a_live_cell(), a_live_cell(), a_live_cell()],
+                [a_dead_cell(), a_dead_cell(), a_dead_cell()],
             ]
+        else:
+            self._board = [
+                    [a_live_cell(), a_live_cell()],
+                    [a_live_cell(), a_live_cell()]
+                ]
         if self._status == GameStatus.INITIALISED:
             self._status = GameStatus.ACTIVE
         else:
