@@ -74,7 +74,10 @@ class Game:
         self.board = [[a_live_cell(), a_live_cell()], [a_live_cell(), a_dead_cell()]]
 
     def next_generation(self):
-        self.board = [[a_dead_cell(), a_live_cell()], [a_live_cell(), a_dead_cell()]]
+        self.board = [
+                [a_live_cell(), a_live_cell()],
+                [a_live_cell(), a_live_cell()]
+            ]
 
     def get_board(self):
         return self.board
