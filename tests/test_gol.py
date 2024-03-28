@@ -92,12 +92,11 @@ class DescribeRunningTheGame:
             [a_live_cell(), a_live_cell()],
             [a_live_cell(), a_dead_cell()]
         ]
-    # def it_produces_the_next_generation(self):
-    #     game = Game(width=2, height=2, life_at=[])
-    #     assert game.get_state() == {
-    #         'generation': 2,
-    #         'board': [
-    #             [a_dead_cell(), a_live_cell()],
-    #             [a_live_cell(), a_dead_cell()]
-    #         ]
-    #     }
+
+    def it_produces_the_next_generation(self):
+        game = Game(width=2, height=2, life_at=[])
+        game.next_generation()
+        assert game.get_board() == [
+                [a_dead_cell(), a_live_cell()],
+                [a_live_cell(), a_dead_cell()]
+            ]
