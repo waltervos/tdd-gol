@@ -71,7 +71,13 @@ def a_dead_cell() -> Cell:
 
 class Game:
     def __init__(self, width, height, life_at) -> None:
-        pass
+        self.board = [[a_live_cell(), a_live_cell()], [a_live_cell(), a_dead_cell()]]
+
+    def next_generation(self):
+        self.board = [
+                [a_dead_cell(), a_live_cell()],
+                [a_live_cell(), a_dead_cell()]
+            ]
 
     def get_board(self):
-        return [[a_live_cell(), a_live_cell()], [a_live_cell(), a_dead_cell()]]
+        return self.board
