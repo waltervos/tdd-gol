@@ -85,5 +85,19 @@ class DescribeCellLifecycle:
 # Exits if no cells change on next generation
 
 
-class DescribeGameRunner:
-    pass
+class DescribeRunningTheGame:
+    def it_initializes_the_game(self):
+        game = Game(width=2, height=2, life_at=[(0,0), (0,1), (1,0), (1,1)])
+        assert game.get_board() == [
+            [a_live_cell(), a_live_cell()],
+            [a_live_cell(), a_dead_cell()]
+        ]
+    # def it_produces_the_next_generation(self):
+    #     game = Game(width=2, height=2, life_at=[])
+    #     assert game.get_state() == {
+    #         'generation': 2,
+    #         'board': [
+    #             [a_dead_cell(), a_live_cell()],
+    #             [a_live_cell(), a_dead_cell()]
+    #         ]
+    #     }
