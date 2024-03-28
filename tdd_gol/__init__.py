@@ -75,21 +75,21 @@ class GameStatus(StrEnum):
 
 class Game:
     def __init__(self, width, height, life_at) -> None:
-        self.board = [[a_live_cell(), a_live_cell()], [a_live_cell(), a_dead_cell()]]
-        self.status = GameStatus.INITIALISED
+        self._board = [[a_live_cell(), a_live_cell()], [a_live_cell(), a_dead_cell()]]
+        self._status = GameStatus.INITIALISED
 
     def next_generation(self):
-        self.board = [
+        self._board = [
                 [a_live_cell(), a_live_cell()],
                 [a_live_cell(), a_live_cell()]
             ]
-        if self.status == GameStatus.INITIALISED:
-            self.status = GameStatus.ACTIVE
+        if self._status == GameStatus.INITIALISED:
+            self._status = GameStatus.ACTIVE
         else:
-            self.status = GameStatus.HALTED
+            self._status = GameStatus.HALTED
     
     def get_state(self):
         return {
-            'status': self.status,
-            'board': self.board
+            'status': self._status,
+            'board': self._board
         }
