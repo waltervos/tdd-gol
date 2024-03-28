@@ -87,16 +87,24 @@ class DescribeCellLifecycle:
 
 class DescribeRunningTheGame:
     def it_initializes_the_game(self):
-        game = Game(width=2, height=2, life_at=[(0,0), (0,1), (1,0), (1,1)])
+        game = Game(width=2, height=2, life_at=[(0,0), (0,1), (1,0)])
         assert game.get_board() == [
             [a_live_cell(), a_live_cell()],
             [a_live_cell(), a_dead_cell()]
         ]
 
     def it_produces_the_next_generation(self):
-        game = Game(width=2, height=2, life_at=[(0,0), (0,1), (1,0), (1,1)])
+        game = Game(width=2, height=2, life_at=[(0,0), (0,1), (1,0)])
         game.next_generation()
         assert game.get_board() == [
                 [a_live_cell(), a_live_cell()],
                 [a_live_cell(), a_live_cell()]
             ]
+        
+    # def it_halts_when_the_next_generation_is_the_same_as_the_last_one(self):
+    #     game = Game(width=2, height=2, life_at=[(0,0), (0,1), (1,0), (1,1)])
+    #     game.next_generation()
+    #     assert game.get_board() == [
+    #             [a_live_cell(), a_live_cell()],
+    #             [a_live_cell(), a_live_cell()]
+    #         ]
