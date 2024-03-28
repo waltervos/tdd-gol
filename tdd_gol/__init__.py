@@ -75,7 +75,14 @@ class GameStatus(StrEnum):
 
 class Game:
     def __init__(self, width, height, life_at) -> None:
-        self._board = [[a_live_cell(), a_live_cell()], [a_live_cell(), a_dead_cell()]]
+        board = []
+        for row in range(0, height):
+            board.append([])
+            for column in range(0, width):
+                cell = a_live_cell() if (row, column) in life_at else a_dead_cell()
+                board[row].append(cell)
+
+        self._board = board
         self._status = GameStatus.INITIALISED
 
     def next_generation(self):
