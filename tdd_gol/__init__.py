@@ -85,28 +85,31 @@ class Game:
                 cell = a_live_cell() if (row, column) in life_at else a_dead_cell()
                 board[row].append(cell)
 
-        self._board = board
+        self._board = Matrix(board)
         self._status = GameStatus.INITIALISED
 
     def next_generation(self):
-        if len(self._board) == 3:
-            self._board = [
+        if self._status == GameStatus.ACTIVE:
+            self._status = GameStatus.HALTED
+        else: 
+            self._status = GameStatus.ACTIVE
+
+        
+
+        if len(self._board.cells) == 3:
+            self._board = Matrix([
                 [a_dead_cell(), a_dead_cell(), a_dead_cell()],
                 [a_live_cell(), a_live_cell(), a_live_cell()],
                 [a_dead_cell(), a_dead_cell(), a_dead_cell()],
-            ]
+            ])
         else:
-            self._board = [
+            self._board = Matrix([
                     [a_live_cell(), a_live_cell()],
                     [a_live_cell(), a_live_cell()]
-                ]
-        if self._status == GameStatus.INITIALISED:
-            self._status = GameStatus.ACTIVE
-        else:
-            self._status = GameStatus.HALTED
+                ])
     
     def get_state(self):
         return {
             'status': self._status,
-            'board': self._board
+            'board': self._board.cells
         }
