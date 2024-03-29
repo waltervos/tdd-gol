@@ -63,3 +63,9 @@ def a_live_cell() -> Cell:
 def a_dead_cell() -> Cell:
     return Cell(alive=False)
 
+class Game:
+    def __init__(self, board: Matrix) -> None:
+        self.board = Matrix([[a_dead_cell()]])
+
+    def next(self):
+        pass

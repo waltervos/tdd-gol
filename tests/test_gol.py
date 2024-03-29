@@ -5,7 +5,7 @@
 # Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
 
-from tdd_gol import Matrix, a_dead_cell, a_live_cell
+from tdd_gol import Game, Matrix, a_dead_cell, a_live_cell
 import pytest
 
 # Finding neighbours in a matrix:
