@@ -122,3 +122,13 @@ class DescribeRunningTheGame:
             [a_live_cell(), a_live_cell(), a_live_cell()],
             [a_dead_cell(), a_dead_cell(), a_dead_cell()],
         ]
+
+    def it_maintains_a_beacon(self):
+        game = Game(width=4, height=4, life_at=[(0,0), (0,1), (1,0), (2,3), (3,2), (3,3)])
+        game.next_generation()
+        game_state = game.get_state()
+        assert game_state['board'] == [
+            [a_dead_cell(), a_dead_cell(), a_dead_cell()],
+            [a_live_cell(), a_live_cell(), a_live_cell()],
+            [a_dead_cell(), a_dead_cell(), a_dead_cell()],
+        ]

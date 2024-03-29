@@ -59,6 +59,9 @@ class Cell:
 
     def __eq__(self, other: "Cell") -> bool:
         return self.is_alive() == other.is_alive()
+    
+    def __repr__(self) -> str:
+        return "Alive" if self.is_alive() else "Dead"
 
 
 def a_live_cell() -> Cell:
