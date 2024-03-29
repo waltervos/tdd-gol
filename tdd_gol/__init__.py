@@ -31,6 +31,9 @@ class Matrix:
 
     def __eq__(self, other: "Matrix") -> bool:
         return self.cells == other.cells
+    
+    def __repr__(self) -> str:
+        return str([cell for cell in [row for row in self.cells]])
 
 
 class Cell:
