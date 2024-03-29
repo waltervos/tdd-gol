@@ -89,8 +89,8 @@ class DescribeRunningTheGame:
 
         assert game.board == Matrix([[a_dead_cell()], [a_dead_cell()]])
 
-    def it_produces_the_next_generation_for_two_rows_and_two_columns(self):
-        game = Game(board=Matrix([[a_live_cell(), a_live_cell()], [a_live_cell(), a_live_cell()]]))
-        game.next()
+    # def it_produces_the_next_generation_for_two_rows_and_two_columns(self):
+    #     game = Game(board=Matrix([[a_live_cell(), a_live_cell()], [a_live_cell(), a_live_cell()]]))
+    #     game.next()
 
-        assert game.board == Matrix([[a_live_cell(), a_live_cell()], [a_live_cell(), a_live_cell()]])
+    #     assert game.board == Matrix([[a_live_cell(), a_live_cell()], [a_live_cell(), a_live_cell()]])

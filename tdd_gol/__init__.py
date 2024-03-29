@@ -86,9 +86,4 @@ class Game:
 
     @property
     def board(self):
-        return Matrix(
-            [
-                [a_dead_cell() for _ in range(0, len(self._board.cells[0]))]
-                for _ in range(0, len(self._board.cells))
-            ]
-        )
+        return self._board
