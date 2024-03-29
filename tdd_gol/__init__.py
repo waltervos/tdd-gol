@@ -65,7 +65,11 @@ def a_dead_cell() -> Cell:
 
 class Game:
     def __init__(self, board: Matrix) -> None:
-        self.board = Matrix([[a_dead_cell()]])
+        pass
 
     def next(self):
         pass
+
+    @property
+    def board(self):
+        return Matrix([[a_dead_cell()]])
