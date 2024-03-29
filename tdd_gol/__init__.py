@@ -75,4 +75,4 @@ class Game:
 
     @property
     def board(self):
-        return Matrix([[a_dead_cell()]]) if len(self._board.cells) == 1 else Matrix([[a_dead_cell()], [a_dead_cell()]])
+        return Matrix([[a_dead_cell()] for _ in range(0, len(self._board.cells))])
