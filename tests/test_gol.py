@@ -7,6 +7,7 @@
 
 from tdd_gol import Matrix, a_dead_cell, a_live_cell
 import pytest
+
 # Finding neighbours in a matrix:
 # (at least) One position away from every edge, a cell has eight neighbours
 # At the edges a cell has fewer neighbours (the matrix isn't a globe): 3 or 5
@@ -76,4 +77,8 @@ class DescribeCellLifecycle:
 
 
 class DescribeRunningTheGame:
-    pass
+    def it_produces_the_next_generation_for_a_single_row_and_column(self):
+        game = Game(board=Matrix([[a_live_cell()]]))
+        game.next()
+
+        assert game.board == Matrix([[a_dead_cell()]])

@@ -62,3 +62,4 @@ def a_live_cell() -> Cell:
 
 def a_dead_cell() -> Cell:
     return Cell(alive=False)
+
