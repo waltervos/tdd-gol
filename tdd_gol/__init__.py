@@ -20,7 +20,7 @@ class Matrix:
         for row_offset, column_offset in self._neigbour_offset:
             neighbour_column_index = column + column_offset
             neighbour_row_index = row + row_offset
-            if 0 <= neighbour_column_index < 3 and 0 <= neighbour_row_index < 3:
+            if 0 <= neighbour_column_index < len(self.cells) and 0 <= neighbour_row_index < len(self.cells[0]):
                 result.append(
                     self._cell_at(neighbour_row_index, neighbour_column_index)
                 )
@@ -39,17 +39,9 @@ class Cell:
 
     def next_generation(self, neighbours):
         if self._living_count(neighbours) not in [2, 3]:
-            self._die_if_alive()
+            return Cell(alive=False)
         else:
-            self._respawn_if_dead()
-
-    def _die_if_alive(self):
-        if self.is_alive():
-            self._alive = False
-
-    def _respawn_if_dead(self):
-        if not self.is_alive():
-            self._alive = True
+            return Cell(alive=True)
 
     def is_alive(self):
         return self._alive
@@ -70,46 +62,3 @@ def a_live_cell() -> Cell:
 
 def a_dead_cell() -> Cell:
     return Cell(alive=False)
-
-class GameStatus(StrEnum):
-    INITIALISED = auto()
-    ACTIVE = auto()
-    HALTED = auto()
-
-class Game:
-    def __init__(self, width, height, life_at) -> None:
-        board = []
-        for row in range(0, height):
-            board.append([])
-            for column in range(0, width):
-                cell = a_live_cell() if (row, column) in life_at else a_dead_cell()
-                board[row].append(cell)
-
-        self._board = Matrix(board)
-        self._status = GameStatus.INITIALISED
-
-    def next_generation(self):
-        if self._status == GameStatus.ACTIVE:
-            self._status = GameStatus.HALTED
-        else: 
-            self._status = GameStatus.ACTIVE
-
-        
-
-        if len(self._board.cells) == 3:
-            self._board = Matrix([
-                [a_dead_cell(), a_dead_cell(), a_dead_cell()],
-                [a_live_cell(), a_live_cell(), a_live_cell()],
-                [a_dead_cell(), a_dead_cell(), a_dead_cell()],
-            ])
-        else:
-            self._board = Matrix([
-                    [a_live_cell(), a_live_cell()],
-                    [a_live_cell(), a_live_cell()]
-                ])
-    
-    def get_state(self):
-        return {
-            'status': self._status,
-            'board': self._board.cells
-        }

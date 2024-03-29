@@ -5,7 +5,7 @@
 # Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
 
-from tdd_gol import Game, GameStatus, Matrix, a_dead_cell, a_live_cell
+from tdd_gol import Matrix, a_dead_cell, a_live_cell
 import pytest
 # Finding neighbours in a matrix:
 # (at least) One position away from every edge, a cell has eight neighbours
@@ -51,33 +51,23 @@ class DescribeFindingNeighboursInAMatrix:
 class DescribeCellLifecycle:
     def it_survives_with_two_live_neighbours(self):
         cell = a_live_cell()
-        cell.next_generation([a_live_cell(), a_live_cell()])
-
-        assert cell.is_alive()
+        assert cell.next_generation([a_live_cell(), a_live_cell()]).is_alive()
 
     def it_dies_when_it_has_four_live_neighbours(self):
         cell = a_live_cell()
-        cell.next_generation([a_live_cell() for _ in range(0, 4)])
-
-        assert not cell.is_alive()
+        assert not cell.next_generation([a_live_cell() for _ in range(0, 4)]).is_alive()
 
     def it_dies_with_one_living_and_one_dead_neighbour(self):
         cell = a_live_cell()
-        cell.next_generation([a_live_cell(), a_dead_cell()])
-
-        assert not cell.is_alive()
+        assert not cell.next_generation([a_live_cell(), a_dead_cell()]).is_alive()
 
     def it_resurrects_when_it_has_three_live_neighbours(self):
         cell = a_dead_cell()
-        cell.next_generation([a_live_cell() for _ in range(0, 3)])
-
-        assert cell.is_alive()
+        assert cell.next_generation([a_live_cell() for _ in range(0, 3)]).is_alive()
 
     def it_remains_dead_without_live_neighbours(self):
         cell = a_dead_cell()
-        cell.next_generation([])
-
-        assert not cell.is_alive()
+        assert not cell.next_generation([]).is_alive()
 
 
 # Game:
@@ -86,49 +76,4 @@ class DescribeCellLifecycle:
 
 
 class DescribeRunningTheGame:
-    def it_initializes_the_game(self):
-        game = Game(width=2, height=2, life_at=[(0,0), (0,1), (1,0)])
-        game_state = game.get_state()
-        assert game_state['status'] == GameStatus.INITIALISED and game_state['board'] == [
-            [a_live_cell(), a_live_cell()],
-            [a_live_cell(), a_dead_cell()]
-        ]
-
-    def it_produces_the_next_generation(self):
-        game = Game(width=2, height=2, life_at=[(0,0), (0,1), (1,0)])
-        game.next_generation()
-        game_state = game.get_state()
-        assert game_state['status'] == GameStatus.ACTIVE and game_state['board'] == [
-                [a_live_cell(), a_live_cell()],
-                [a_live_cell(), a_live_cell()]
-            ]
-        
-    def it_halts_when_the_next_generation_is_the_same_as_the_last_one(self):
-        game = Game(width=2, height=2, life_at=[(0,0), (0,1), (1,0), (1,1)])
-        game.next_generation()
-        game.next_generation()
-        game_state = game.get_state()
-        assert game_state['status'] == GameStatus.HALTED and game_state['board'] == [
-                [a_live_cell(), a_live_cell()],
-                [a_live_cell(), a_live_cell()]
-            ]
-        
-    def it_maintains_a_blinker(self):
-        game = Game(width=3, height=3, life_at=[(0,1), (1,1), (2,1)])
-        game.next_generation()
-        game_state = game.get_state()
-        assert game_state['board'] == [
-            [a_dead_cell(), a_dead_cell(), a_dead_cell()],
-            [a_live_cell(), a_live_cell(), a_live_cell()],
-            [a_dead_cell(), a_dead_cell(), a_dead_cell()],
-        ]
-
-    def it_maintains_a_beacon(self):
-        game = Game(width=4, height=4, life_at=[(0,0), (0,1), (1,0), (2,3), (3,2), (3,3)])
-        game.next_generation()
-        game_state = game.get_state()
-        assert game_state['board'] == [
-            [a_dead_cell(), a_dead_cell(), a_dead_cell()],
-            [a_live_cell(), a_live_cell(), a_live_cell()],
-            [a_dead_cell(), a_dead_cell(), a_dead_cell()],
-        ]
+    pass
