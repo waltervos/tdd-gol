@@ -100,4 +100,11 @@ class Game:
         if len(self.board[0]) == 1:
             self.board = [[a_dead_cell()]]
         else:
-            self.board = [[a_dead_cell(), a_live_cell(), a_dead_cell()] for row in self.board]
+            self.board = [
+                [
+                    row[0].next_generation([]),
+                    row[1].next_generation([a_live_cell(), a_live_cell()]),
+                    row[2].next_generation([]),
+                ]
+                for row in self.board
+            ]
