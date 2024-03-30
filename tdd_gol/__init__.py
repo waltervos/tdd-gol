@@ -35,13 +35,14 @@ class Cell:
         self._alive = alive
 
     def next_generation(self, neighbours):
+        living_count = self._living_count(neighbours)
         if self.is_alive():
-            if self._living_count(neighbours) in [2, 3]:
+            if living_count in [2, 3]:
                 return Cell(alive=True)
             else:
                 return Cell(alive=False)
         else:
-            if self._living_count(neighbours) == 3:
+            if living_count == 3:
                 return Cell(alive=True)
             else:
                 return Cell(alive=False)
