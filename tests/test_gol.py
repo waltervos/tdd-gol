@@ -78,20 +78,20 @@ class DescribeCellLifecycle:
 # Produces the next generation for each cell
 # Exits if no cells change on next generation
 
-class DescribeRunningTheGame:
-    def it_initialises_the_board_without_living_cells(self):
+class DescribeInitialisingTheGame:
+    def it_initialises_the_board_with_a_dead_cell_if_no_living_cells_are_given(self):
         game = Game(width=1, height=1)
         assert game.board == [
             [a_dead_cell()]
         ]
 
-    def it_initialises_the_board_with_a_living_cell(self):
+    def it_initialises_the_board_with_a_living_cell_at_the_given_row_and_column(self):
         game = Game(width=1, height=1, living_cells_at=[(0,0)])
         assert game.board == [
             [a_live_cell()]
         ]
 
-    def it_initialises_the_board_with_a_dead_and_living_cell(self):
+    def it_initialises_the_board_with_a_dead_and_living_cell_at_their_given_row_and_column(self):
         game = Game(width=2, height=1, living_cells_at=[(0,1)])
         assert game.board == [
             [a_dead_cell(), a_live_cell()]
