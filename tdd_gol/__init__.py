@@ -91,4 +91,4 @@ class Game:
         return self
     
     def __next__(self):
-        ...
+        self.board = [[a_dead_cell()]]
