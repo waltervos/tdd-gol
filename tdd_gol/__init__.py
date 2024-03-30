@@ -43,10 +43,11 @@ class Cell:
                 return Cell(alive=True)
             else:
                 return Cell(alive=False)
-        elif self._living_count(neighbours) in [2, 3] and self.is_alive():
-            return Cell(alive=True)
         else:
-            return Cell(alive=False)
+            if self._living_count(neighbours) in [2, 3]:
+                return Cell(alive=True)
+            else:
+                return Cell(alive=False)
 
     def is_alive(self):
         return self._alive
