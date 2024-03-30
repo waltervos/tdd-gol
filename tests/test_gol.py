@@ -79,8 +79,14 @@ class DescribeCellLifecycle:
 # Exits if no cells change on next generation
 
 class DescribeRunningTheGame:
-    def it_initialises_the_board_(self):
+    def it_initialises_the_board_without_living_cells(self):
         game = Game(width=1, height=1)
         assert game.board == [
             [a_dead_cell()]
+        ]
+
+    def it_initialises_the_board_with_a_living_cell(self):
+        game = Game(width=1, height=1, living_cells_at=[(0,0)])
+        assert game.board == [
+            [a_live_cell()]
         ]

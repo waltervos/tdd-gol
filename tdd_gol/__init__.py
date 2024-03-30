@@ -70,6 +70,9 @@ def a_live_cell() -> Cell:
 def a_dead_cell() -> Cell:
     return Cell(alive=False)
 
+
 class Game:
     def __init__(self, width, height) -> None:
-        self.board = [[a_dead_cell() for _ in range(0, width)] for _ in range(0, height)]
+        self.board = [
+            [a_dead_cell() for _ in range(0, width)] for _ in range(0, height)
+        ]
