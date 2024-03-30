@@ -38,6 +38,8 @@ class Cell:
         self._alive = alive
 
     def next_generation(self, neighbours):
+        if self._living_count(neighbours) == 2 and not self.is_alive():
+            return Cell(alive=False)
         if self._living_count(neighbours) not in [2, 3]:
             return Cell(alive=False)
         else:
