@@ -97,4 +97,7 @@ class Game:
         return self
 
     def __next__(self):
-        self.board = [[a_dead_cell()]]
+        if len(self.board[0]) == 1:
+            self.board = [[a_dead_cell()]]
+        else:
+            self.board = [[a_dead_cell(), a_live_cell(), a_dead_cell()] for row in self.board]
