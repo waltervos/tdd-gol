@@ -38,7 +38,7 @@ class Cell:
         self._alive = alive
 
     def next_generation(self, neighbours):
-        if self._living_count(neighbours) == 2 and not self.is_alive():
+        if self._living_count(neighbours) == 2 and self.is_dead():
             return Cell(alive=False)
         if self._living_count(neighbours) not in [2, 3]:
             return Cell(alive=False)
@@ -47,6 +47,9 @@ class Cell:
 
     def is_alive(self):
         return self._alive
+    
+    def is_dead(self):
+        return not self.is_alive()
 
     def _living_count(self, cells):
         return len([c for c in cells if c.is_alive()])
