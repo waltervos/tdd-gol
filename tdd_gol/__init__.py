@@ -40,7 +40,9 @@ class Cell:
     def next_generation(self, neighbours):
         if self._living_count(neighbours) == 2 and self.is_dead():
             return Cell(alive=False)
-        if self._living_count(neighbours) in [2, 3]:
+        elif self._living_count(neighbours) == 3 and self.is_dead():
+            return Cell(alive=True)
+        elif self._living_count(neighbours) in [2, 3]:
             return Cell(alive=True)
         else:
             return Cell(alive=False)
