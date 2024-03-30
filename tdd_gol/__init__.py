@@ -24,7 +24,7 @@ class Matrix:
                 result.append(
                     self._cell_at(neighbour_row_index, neighbour_column_index)
                 )
-        return result
+        return [n for n in result if n]
 
     def _cell_at(self, row, column):
         try:
