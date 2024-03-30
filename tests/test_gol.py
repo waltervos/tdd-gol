@@ -107,3 +107,14 @@ class DescribeRunningTheGame:
         game = Game(width=3, height=1, living_cells_at=[(0, 0), (0, 1), (0, 2)])
         next(game)
         assert game.board == [[a_dead_cell(), a_live_cell(), a_dead_cell()]]
+
+    def it_maintains_a_blinker(
+        self,
+    ):
+        game = Game(width=3, height=3, living_cells_at=[(0, 1), (1, 1), (2, 1)])
+        next(game)
+        assert game.board == [
+            [a_dead_cell(), a_dead_cell(), a_dead_cell()],
+            [a_live_cell(), a_live_cell(), a_live_cell()],
+            [a_dead_cell(), a_dead_cell(), a_dead_cell()],
+        ]
