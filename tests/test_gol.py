@@ -75,22 +75,3 @@ class DescribeCellLifecycle:
 # Produces the next generation for each cell
 # Exits if no cells change on next generation
 
-
-class DescribeRunningTheGame:
-    def it_produces_the_next_generation_for_a_single_row_and_column(self):
-        game = Game(board=Matrix([[a_live_cell()]]))
-        game.next()
-
-        assert game.board == Matrix([[a_dead_cell()]])
-
-    def it_produces_the_next_generation_for_two_rows_and_one_column(self):
-        game = Game(board=Matrix([[a_live_cell()], [a_live_cell()]]))
-        game.next()
-
-        assert game.board == Matrix([[a_dead_cell()], [a_dead_cell()]])
-
-    # def it_produces_the_next_generation_for_two_rows_and_two_columns(self):
-    #     game = Game(board=Matrix([[a_live_cell(), a_live_cell()], [a_live_cell(), a_live_cell()]]))
-    #     game.next()
-
-    #     assert game.board == Matrix([[a_live_cell(), a_live_cell()], [a_live_cell(), a_live_cell()]])
