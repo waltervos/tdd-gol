@@ -118,7 +118,7 @@ class Game:
         return self
 
     @property
-    def board(self):
+    def board(self) -> list[list[Cell]]:
         return self._board_matrix.cells
     
     def __str__(self) -> str:
