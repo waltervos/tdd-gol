@@ -115,7 +115,17 @@ class Game:
             raise StopIteration
         
         self._board_matrix = new_board_matrix
+        return self
 
     @property
     def board(self):
         return self._board_matrix.cells
+    
+    def __str__(self) -> str:
+        game_string = ""
+        for row in self.board:
+            for cell in row:
+                game_string += "██" if cell.is_alive() else "  "
+            game_string += "\n"
+
+        return game_string
