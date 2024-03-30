@@ -76,19 +76,25 @@ class Game:
         if not living_cells_at:
             living_cells_at = []
 
-        self.board = self._create_board(of_width=width, of_height=height, with_living_cells_at=living_cells_at)
+        self.board = self._create_board(
+            of_width=width, of_height=height, with_living_cells_at=living_cells_at
+        )
 
     def _create_board(self, of_width, of_height, with_living_cells_at):
         return [
             [
-                a_live_cell() if (row, column) in with_living_cells_at else a_dead_cell()
+                (
+                    a_live_cell()
+                    if (row, column) in with_living_cells_at
+                    else a_dead_cell()
+                )
                 for column in range(0, of_width)
             ]
             for row in range(0, of_height)
         ]
-    
+
     def __iter__(self):
         return self
-    
+
     def __next__(self):
         self.board = [[a_dead_cell()]]
