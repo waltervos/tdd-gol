@@ -1,6 +1,6 @@
 class Matrix:
     def __init__(self, cells) -> None:
-        self._cells = cells
+        self.cells = cells
 
     def neighbours_for(self, row, column):
         return [
@@ -22,12 +22,12 @@ class Matrix:
         if row < 0 or column < 0:
             return None
         try:
-            return self._cells[row][column]
+            return self.cells[row][column]
         except IndexError:
             return None
 
     def __eq__(self, other: "Matrix") -> bool:
-        return self._cells == other._cells
+        return self.cells == other.cells
 
 
 class Cell:
@@ -76,12 +76,12 @@ class Game:
         if not living_cells_at:
             living_cells_at = []
 
-        self.board = self._create_board(
+        self._board = self._create_board(
             of_width=width, of_height=height, with_living_cells_at=living_cells_at
         )
 
-    def _create_board(self, of_width, of_height, with_living_cells_at):
-        return [
+    def _create_board(self, of_width, of_height, with_living_cells_at) -> Matrix:
+        return Matrix([
             [
                 (
                     a_live_cell()
@@ -91,20 +91,24 @@ class Game:
                 for column in range(0, of_width)
             ]
             for row in range(0, of_height)
-        ]
+        ])
 
     def __iter__(self):
         return self
 
     def __next__(self):
         if len(self.board[0]) == 1:
-            self.board = [[a_dead_cell()]]
+            self._board = Matrix([[a_dead_cell()]])
         else:
-            self.board = [
+            self._board = Matrix([
                 [
                     row[0].next_generation([]),
                     row[1].next_generation([a_live_cell(), a_live_cell()]),
                     row[2].next_generation([]),
                 ]
                 for row in self.board
-            ]
+            ])
+
+    @property
+    def board(self):
+        return self._board.cells
