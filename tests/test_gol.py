@@ -99,7 +99,7 @@ class DescribeInitialisingTheGame:
 
 class DescribeRunningTheGame:
     def it_produces_the_next_generation_for_a_single_row_and_column_with_a_living_cell(self):
-        game = Game(width=1, height=1)
+        game = Game(width=1, height=1, living_cells_at=[(0,0)])
         next(game)
         assert game.board == [
             [a_dead_cell()]

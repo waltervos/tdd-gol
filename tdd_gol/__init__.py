@@ -86,3 +86,9 @@ class Game:
             ]
             for row in range(0, of_height)
         ]
+    
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        ...
