@@ -103,7 +103,7 @@ class Game:
             self._board = Matrix([
                 [
                     row[0].next_generation([]),
-                    row[1].next_generation([a_live_cell(), a_live_cell()]),
+                    row[1].next_generation(self._board.neighbours_for(0,1)),
                     row[2].next_generation([]),
                 ]
                 for row in self.board
