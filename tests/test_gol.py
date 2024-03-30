@@ -5,6 +5,7 @@
 # Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
 
+import pytest
 from tdd_gol import Game, Matrix, a_dead_cell, a_live_cell
 
 # Finding neighbours in a matrix:
@@ -118,3 +119,8 @@ class DescribeRunningTheGame:
             [a_live_cell(), a_live_cell(), a_live_cell()],
             [a_dead_cell(), a_dead_cell(), a_dead_cell()],
         ]
+
+    def it_halts_when_the_two_iterations_produce_the_same_result(self):
+        game = Game(width=2, height=2, living_cells_at=[(0, 0), (0, 1), (1, 0), (1, 1)])
+        with pytest.raises(StopIteration):
+            next(game)

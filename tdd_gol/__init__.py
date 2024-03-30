@@ -76,7 +76,7 @@ class Game:
         if not living_cells_at:
             living_cells_at = []
 
-        self._board = self._create_board(
+        self._board_matrix = self._create_board(
             of_width=width, of_height=height, with_living_cells_at=living_cells_at
         )
 
@@ -99,11 +99,11 @@ class Game:
         return self
 
     def __next__(self):
-        self._board = Matrix(
+        new_board_matrix = Matrix(
             [
                 [
                     cell.next_generation(
-                        self._board.neighbours_for(row_index, cell_index)
+                        self._board_matrix.neighbours_for(row_index, cell_index)
                     )
                     for cell_index, cell in enumerate(row)
                 ]
@@ -111,6 +111,11 @@ class Game:
             ]
         )
 
+        if new_board_matrix == self._board_matrix:
+            raise StopIteration
+        
+        self._board_matrix = new_board_matrix
+
     @property
     def board(self):
-        return self._board.cells
+        return self._board_matrix.cells
