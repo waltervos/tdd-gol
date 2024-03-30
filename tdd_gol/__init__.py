@@ -20,13 +20,14 @@ class Matrix:
         for row_offset, column_offset in self._neigbour_offset:
             neighbour_column_index = column + column_offset
             neighbour_row_index = row + row_offset
-            if 0 <= neighbour_column_index < len(self.cells) and 0 <= neighbour_row_index < len(self.cells[0]):
-                result.append(
-                    self._cell_at(neighbour_row_index, neighbour_column_index)
-                )
+            result.append(
+                self._cell_at(neighbour_row_index, neighbour_column_index)
+            )
         return [n for n in result if n]
 
     def _cell_at(self, row, column):
+        if row < 0 or column < 0:
+            return None
         try:
             return self.cells[row][column]
         except IndexError:
