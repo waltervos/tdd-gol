@@ -38,10 +38,11 @@ class Cell:
         self._alive = alive
 
     def next_generation(self, neighbours):
-        if self._living_count(neighbours) == 2 and self.is_dead():
-            return Cell(alive=False)
-        elif self._living_count(neighbours) == 3 and self.is_dead():
-            return Cell(alive=True)
+        if self.is_dead():
+            if self._living_count(neighbours) != 3 and self.is_dead():
+                return Cell(alive=False)
+            elif self._living_count(neighbours) == 3 and self.is_dead():
+                return Cell(alive=True)
         elif self._living_count(neighbours) in [2, 3] and self.is_alive():
             return Cell(alive=True)
         else:
