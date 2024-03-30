@@ -1,6 +1,3 @@
-from enum import Enum, StrEnum, auto
-
-
 class Matrix:
     def __init__(self, cells) -> None:
         self._cells = cells
@@ -55,7 +52,7 @@ class Cell:
     def is_dead(self):
         return not self.is_alive()
 
-    def _living_count(self, cells):
+    def _living_count(self, cells: list["Cell"]):
         return len([c for c in cells if c.is_alive()])
 
     def __eq__(self, other: "Cell") -> bool:
