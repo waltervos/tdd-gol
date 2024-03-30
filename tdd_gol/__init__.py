@@ -69,3 +69,7 @@ def a_live_cell() -> Cell:
 
 def a_dead_cell() -> Cell:
     return Cell(alive=False)
+
+class Game:
+    def __init__(self, width, height) -> None:
+        self.board = [[a_dead_cell()]]
