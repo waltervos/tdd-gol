@@ -27,7 +27,10 @@ class Matrix:
         return result
 
     def _cell_at(self, row, column):
-        return self.cells[row][column]
+        try:
+            return self.cells[row][column]
+        except IndexError:
+            return None
 
     def __eq__(self, other: "Matrix") -> bool:
         return self.cells == other.cells
