@@ -3,49 +3,34 @@ from enum import Enum, StrEnum, auto
 
 class Matrix:
     def __init__(self, cells) -> None:
-        self.cells = cells
-        self._neigbour_offset = [
-            (-1, -1),
-            (-1, 0),
-            (-1, 1),
-            (0, -1),
-            (0, 1),
-            (1, -1),
-            (1, 0),
-            (1, 1),
-        ]
+        self._cells = cells
 
     def neighbours_for(self, row, column):
-        result = []
-        for row_offset, column_offset in self._neigbour_offset:
-            neighbour_column_index = column + column_offset
-            neighbour_row_index = row + row_offset
-            result.append(
-                self._cell_at(neighbour_row_index, neighbour_column_index)
-            )
-        # return [n for n in result if n]
-    
-        return [n for n in 
-            [self._cell_at(row - 1,column  -1),
-            self._cell_at(row - 1,column    ),
-            self._cell_at(row - 1,column+  1),
-            self._cell_at(row ,   column  -1),
-            self._cell_at(row ,   column  +1),
-            self._cell_at(row +1 ,column  -1),
-            self._cell_at(row +1 ,column    ),
-            self._cell_at(row +1 ,column  +1),] if n
+        return [
+            cell
+            for cell in [
+                self._cell_at(row - 1, column - 1),
+                self._cell_at(row - 1, column),
+                self._cell_at(row - 1, column + 1),
+                self._cell_at(row, column - 1),
+                self._cell_at(row, column + 1),
+                self._cell_at(row + 1, column - 1),
+                self._cell_at(row + 1, column),
+                self._cell_at(row + 1, column + 1),
+            ]
+            if cell
         ]
 
     def _cell_at(self, row, column):
         if row < 0 or column < 0:
             return None
         try:
-            return self.cells[row][column]
+            return self._cells[row][column]
         except IndexError:
             return None
 
     def __eq__(self, other: "Matrix") -> bool:
-        return self.cells == other.cells
+        return self._cells == other._cells
 
 
 class Cell:
@@ -66,7 +51,7 @@ class Cell:
 
     def is_alive(self):
         return self._alive
-    
+
     def is_dead(self):
         return not self.is_alive()
 
@@ -75,7 +60,7 @@ class Cell:
 
     def __eq__(self, other: "Cell") -> bool:
         return self.is_alive() == other.is_alive()
-    
+
     def __repr__(self) -> str:
         return "Alive" if self.is_alive() else "Dead"
 
