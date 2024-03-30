@@ -90,3 +90,9 @@ class DescribeRunningTheGame:
         assert game.board == [
             [a_live_cell()]
         ]
+
+    def it_initialises_the_board_with_a_dead_and_living_cell(self):
+        game = Game(width=2, height=1, living_cells_at=[(0,1)])
+        assert game.board == [
+            [a_dead_cell(), a_live_cell()]
+        ]
