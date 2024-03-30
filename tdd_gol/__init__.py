@@ -81,17 +81,19 @@ class Game:
         )
 
     def _create_board(self, of_width, of_height, with_living_cells_at) -> Matrix:
-        return Matrix([
+        return Matrix(
             [
-                (
-                    a_live_cell()
-                    if (row, column) in with_living_cells_at
-                    else a_dead_cell()
-                )
-                for column in range(0, of_width)
+                [
+                    (
+                        a_live_cell()
+                        if (row, column) in with_living_cells_at
+                        else a_dead_cell()
+                    )
+                    for column in range(0, of_width)
+                ]
+                for row in range(0, of_height)
             ]
-            for row in range(0, of_height)
-        ])
+        )
 
     def __iter__(self):
         return self
@@ -100,14 +102,17 @@ class Game:
         if len(self.board[0]) == 1:
             self._board = Matrix([[a_dead_cell()]])
         else:
-            self._board = Matrix([
+            self._board = Matrix(
                 [
-                    row[0].next_generation([]),
-                    row[1].next_generation(self._board.neighbours_for(0,1)),
-                    row[2].next_generation([]),
+                    [
+                        cell.next_generation(
+                            self._board.neighbours_for(row_index, cell_index)
+                        )
+                        for cell_index, cell in enumerate(row)
+                    ]
+                    for row_index, row in enumerate(self.board)
                 ]
-                for row in self.board
-            ])
+            )
 
     @property
     def board(self):
