@@ -42,7 +42,7 @@ class Cell:
             return Cell(alive=False)
         elif self._living_count(neighbours) == 3 and self.is_dead():
             return Cell(alive=True)
-        elif self._living_count(neighbours) in [2, 3]:
+        elif self._living_count(neighbours) in [2, 3] and self.is_alive():
             return Cell(alive=True)
         else:
             return Cell(alive=False)
