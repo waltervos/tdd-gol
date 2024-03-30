@@ -99,20 +99,17 @@ class Game:
         return self
 
     def __next__(self):
-        if len(self.board[0]) == 1:
-            self._board = Matrix([[a_dead_cell()]])
-        else:
-            self._board = Matrix(
+        self._board = Matrix(
+            [
                 [
-                    [
-                        cell.next_generation(
-                            self._board.neighbours_for(row_index, cell_index)
-                        )
-                        for cell_index, cell in enumerate(row)
-                    ]
-                    for row_index, row in enumerate(self.board)
+                    cell.next_generation(
+                        self._board.neighbours_for(row_index, cell_index)
+                    )
+                    for cell_index, cell in enumerate(row)
                 ]
-            )
+                for row_index, row in enumerate(self.board)
+            ]
+        )
 
     @property
     def board(self):
