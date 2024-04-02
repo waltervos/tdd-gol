@@ -76,6 +76,7 @@ class Game:
         if not living_cells_at:
             living_cells_at = []
 
+        self._previous_board_matrix = None
         self._board_matrix = self._create_board(
             of_width=width, of_height=height, with_living_cells_at=living_cells_at
         )
@@ -111,21 +112,19 @@ class Game:
             ]
         )
 
+        if (
+            self._previous_board_matrix
+            and self._previous_board_matrix == new_board_matrix
+        ):
+            raise StopIteration
         if new_board_matrix == self._board_matrix:
             raise StopIteration
-        
+
+        self._previous_board_matrix = self._board_matrix
         self._board_matrix = new_board_matrix
         return self
 
     @property
     def board(self) -> list[list[Cell]]:
         return self._board_matrix.cells
-    
-    def __str__(self) -> str:
-        game_string = ""
-        for row in self.board:
-            for cell in row:
-                game_string += "██" if cell.is_alive() else "  "
-            game_string += "\n"
 
-        return game_string

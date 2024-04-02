@@ -124,3 +124,9 @@ class DescribeRunningTheGame:
         game = Game(width=2, height=2, living_cells_at=[(0, 0), (0, 1), (1, 0), (1, 1)])
         with pytest.raises(StopIteration):
             next(game)
+
+    def it_halts_when_two_rounds_repeat(self):
+        game = Game(width=3, height=3, living_cells_at=[(0, 1), (1, 1), (2, 1)])
+        next(game)
+        with pytest.raises(StopIteration):
+            next(game)

@@ -1,12 +1,10 @@
-import os
 import random
-import time
 from tkinter import Canvas, Tk
-from tdd_gol import Game
-
+from tdd_gol import Cell
+from tdd_gol.factories import GameFactory, RandomGameFactory
 
 class GameOfLife(Tk):
-    def __init__(self, width_and_height=400, resolution=100) -> None:
+    def __init__(self, game_factory: GameFactory, width_and_height=400, resolution=100) -> None:
         super().__init__()
 
         self.resizable(False, False)
@@ -18,33 +16,14 @@ class GameOfLife(Tk):
         self.geometry(f"{self.width_and_height}x{self.width_and_height}")
 
         self.canvas = Canvas(
-            self, width=self.width_and_height, height=self.width_and_height, bg="gray27"
+            self,
+            width=self.width_and_height,
+            height=self.width_and_height,
+            bg="darkorchid1",
         )
         self.canvas.pack()
 
-        self.game = Game(
-            width=self.resolution,
-            height=self.resolution,
-            # living_cells_at=[ # Creates a glider in the bottom right
-            #     (self.resolution - 3, self.resolution - 3),
-            #     (self.resolution - 3, self.resolution - 2),
-            #     (self.resolution - 3, self.resolution - 1),
-            #     (self.resolution - 2, self.resolution - 3),
-            #     (self.resolution - 1, self.resolution - 2),
-            # ],
-            # living_cells_at=[ # Creates 4 blinkers
-            #     ((self.resolution / 2) - 1, (self.resolution / 2) - 1),
-            #     ((self.resolution / 2) - 2, (self.resolution / 2) - 1),
-            #     ((self.resolution / 2) - 2, (self.resolution / 2) - 2),
-            #     ((self.resolution / 2) - 2, self.resolution / 2),
-            # ],
-            living_cells_at=[ # Random
-                (row, column)
-                for row in range(0, self.resolution)
-                for column in range(0, self.resolution)
-                if random.randint(0,1) == 1
-            ],
-        )
+        self.game = game_factory.create_game(width=self.resolution, height=self.resolution)
 
         self.after(50, self.update_board)
 
@@ -54,13 +33,17 @@ class GameOfLife(Tk):
             for column_number, cell in enumerate(row):
                 real_x = row_number * self.size_factor
                 real_y = column_number * self.size_factor
-                if cell.is_alive():
-                    self.draw_square(real_x, real_y, self.size_factor)
 
-    def draw_square(self, y, x, size):
-        self.canvas.create_rectangle(
-            x, y, x + size, y + size, fill="chartreuse1", outline="chartreuse1"
-        )
+                self.draw_cell(cell, real_x, real_y, self.size_factor)
+
+    def draw_cell(self, cell: Cell, y, x, size):
+        index = random.randint(0, 3)
+        colour = ["chartreuse1", "aqua", "gold1", "cyan"][index]
+
+        if cell.is_dead():
+            return
+
+        self.canvas.create_oval(x, y, x + size, y + size, fill=colour, outline=colour)
 
     def update_board(self):
         # Clear the canvas.
@@ -78,7 +61,7 @@ class GameOfLife(Tk):
 
 
 def main():
-    game_of_life = GameOfLife()
+    game_of_life = GameOfLife(game_factory=RandomGameFactory(), resolution=50, width_and_height=600)
     game_of_life.mainloop()
 
 
